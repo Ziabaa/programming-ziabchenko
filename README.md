@@ -1,2 +1,3 @@
 # programming-ziabchenko
-lab
+Зябченко Іван 922а
+'основи debug процесу' 
