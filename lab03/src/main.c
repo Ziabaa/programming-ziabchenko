@@ -62,5 +62,33 @@ int main()
 	int resistances_2 = 23;
 	int resistances_3 = 41;
 	float general_resistance = (resistances_1 * resistances_2 * resistances_3) / (float)(resistances_1 + resistances_2 + resistances_3);
+	//
+	float x_1 = 4.0f;
+	float x_2 = 2.0f;
+	float y_1 = 3.0f;
+	float y_2 = 4.0f;
+	float z_1 = 5.0f;
+	float z_2 = 2.0f;
+	float dist_m1_m2 = ((x_2 - x_1) * (x_2 - x_1)) + ((y_2 - y_1) * (y_2 - y_1)) + ((z_2 - z_1) * (z_2 - z_1));
+	//
+	int number_4s = 4756;
+	int number_first = number_4s / 1000;
+	int number_second = (number_4s / 100) % 10;
+	int number_third = (number_4s / 10) % 10;
+	int number_fourth = number_4s % 10;
+	int ten_sist = (number_first * 8 * 8 * 8) + (number_second * 8 * 8) + (number_third * 8) + (number_fourth * 1);
+	//
+	int three_numbs = 193;
+	int one_numb = three_numbs / 100.0f;
+	int three_numb = three_numbs % 10;
+	float one_minus_three = (one_numb / (float)three_numb);
+	int one_min_three = one_minus_three * 100;
+	float one_minuse_three = (float)one_min_three / 100;
+	//
+	int first_mean = 28;
+	int second_mean = 35;
+	int second_minus_first = second_mean - first_mean;
+
 	return 0;
+
 }
