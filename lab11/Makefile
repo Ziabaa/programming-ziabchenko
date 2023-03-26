@@ -1,6 +1,10 @@
 CC = clang
 LAB_OPTS = -I./src src/matrix.c
-C_OPTS = $(MAC_OPTS) -std=gnu11 -g -Wall -Wextra -Werror -Wformat-security -Wfloat-equal -Wshadow -Wconversion -Wlogical-not-parentheses -Wnull-dereference -Wno-unused-variable -Werror=vla $(LAB_OPTS)
+C_OPTS = $(MAC_OPTS) -std=gnu11 -g -Wall -fsanitize=address -Wextra -Werror -Wformat-security -Wfloat-equal -Wshadow -Wconversion -Wlogical-not-parentheses -Wnull-dereference -Wno-unused-variable -Werror=vla $(LAB_OPTS)
+
+leak-check: clean prep compile
+    ASAN_OPTIONS=detect_leaks=1 dist/main.bin
+    ASAN_OPTIONS=detect_leaks=1 LLVM_PROFILE_FILE="dist/test.profraw" dist/test.bin
 
 clean:
 	rm -rf dist
