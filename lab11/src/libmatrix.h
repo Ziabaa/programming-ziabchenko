@@ -1,11 +1,11 @@
+//#ifndef __MATRIX_H__
+//#define __MATRIX_H__
+
 #include <stdlib.h>
 
-//сортирує масив чисел
-void sort_array(int *array, int size);
+void m_matrix(int **matrix1, int **matrix2, int **res_matrix, int size_x, int size_y);
 
-//бере спільну кількість стовпців та колонок(квадратна матриця)
-int take_a_square_matrix(int columns, int rows);
 
-//робить із двумірної матриці одномірну, яка складається з елементів головної
-//діагоналі двумірної матриці, та сортує вихідну матрицю
-void take_the_main_diagonal_and_sort(int const *matrix, int columns, int rows, int *res_array);
+void print_m(int **matrix, unsigned int size_x, unsigned int size_y);
+
+//#endif
