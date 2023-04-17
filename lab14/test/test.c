@@ -1,4 +1,4 @@
-#include "../src/pyramid.h"
+#include "pyramid.h"
 #include <check.h>
 
 
