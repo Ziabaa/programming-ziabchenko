@@ -22,9 +22,9 @@ enum Characters{
  * Контактна інформація про співробітника
  */
 struct InformationOfColleague{
-	char surname[50]; /**<Фамілія*/
+	char surname[30]; /**<Фамілія*/
 	char name_colleague[20]; /**<Ім'я*/
-	char email[50]; /**<імейл*/
+	char email[30]; /**<імейл*/
 };
 
 /**

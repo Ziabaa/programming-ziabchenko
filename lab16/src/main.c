@@ -1,21 +1,22 @@
 #include "colleague.h"
 #include "worker.h"
+
 int main()
 {
 	struct Workers * workers = malloc(sizeof (struct Workers));
 	workers->colleagues = malloc(3 * sizeof(struct Colleague*));
-	for (size_t i = 0; i < 3; i++){
-		workers->colleagues[i] = malloc(3 * sizeof(struct Colleague));
-	}
+	workers->colleagues[0] = malloc(sizeof(struct Colleague));
+	workers->colleagues[1] = malloc(sizeof(struct Colleague));
+	workers->colleagues[2] = malloc(sizeof(struct Colleague));
 	workers->size = 3;
 
 	workers->colleagues[0]->insurance = 1;
 	workers->colleagues[1]->insurance = 0;
 	workers->colleagues[2]->insurance = 1;
 
-	strcpy(workers->colleagues[0]->name_company, "NIX");
-	strcpy(workers->colleagues[1]->name_company, "Microsoft");
-	strcpy(workers->colleagues[2]->name_company, "Google");
+	strcpy(workers->colleagues[0]->name_company, "Google");
+	strcpy(workers->colleagues[1]->name_company, "NIX");
+	strcpy(workers->colleagues[2]->name_company, "Microsoft");
 
 	workers->colleagues[0]->work_experience = 2.3f;
 	workers->colleagues[1]->work_experience = 6.0f;
@@ -34,12 +35,11 @@ int main()
 	workers->colleagues[0]->employ_characteristic = 0;
 	workers->colleagues[1]->employ_characteristic = 1;
 	workers->colleagues[2]->employ_characteristic = 2;
-//
-//	writeColleagueToFile("assets/output.txt", workers);
-	printWorkers(workers);
-	printf("\n\n\n");
 
-	sortColleague(workers, "work_experience", 1);
+//	writeWorkersToFile("assets/output.txt", workers);
+//	printf("%lu\n", sizeof(struct Colleague));
+
+	sortColleague(workers, "name_company", 1);
 	printWorkers(workers);
 
 //	struct Workers * new_workers_from_file = readColleagueFromFile("assets/input.txt");

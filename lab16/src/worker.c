@@ -83,44 +83,18 @@ void writeWorkersToFile(char * filename, struct Workers * workers){
 	fclose(file);
 }
 
-
-int cmp_insur(const void *insur1, const void *insur2)
-{
-	const struct Colleague *ti1 = insur1;
-	const struct Colleague *ti2 = insur2;
-	if (ti1->insurance == 0 && ti2->insurance == 0){
-		return 0;
-	}else if (ti1->insurance == 1 && ti2->insurance == 1){
-		return 0;
-	}else return 1;
-}
-
 int cmp_names(const void *name1, const void *name2)
 {
-	const struct Colleague *tn1 = (const struct Colleague *)name1;
-	const struct Colleague *tn2 = (const struct Colleague *)name2;
-	return -strcmp(tn1->name_company, tn2->name_company);
-}
-
-int cmp_work(const void *work1, const void *work2)
-{
-	const struct Colleague *tw1 = (struct Colleague *)work1;
-	const struct Colleague *tw2 = (struct Colleague *)work2;
-	if(tw2->work_experience > tw1->work_experience) return 1;
-	if(tw2->work_experience < tw1->work_experience) return -1;
-	return 0;
+	const struct Colleague *a = name1, *b = name2;
+	printf("----------->%s\n", a->name_company);
+	printf("----------->%s\n\n", b->name_company);
+	return -strcmp(a->name_company, b->name_company);
 }
 
 void sortColleague(struct Workers * workers, char * fieldName, bool isAscending){
-	if (strcmp(fieldName, "insurance") == 0 && isAscending == 1){
-		qsort(workers->colleagues, workers->size,
-		      sizeof (workers->colleagues[0]), cmp_insur);
-	}else if (strcmp(fieldName, "name_company") == 0 && isAscending ==1){
-		qsort(workers->colleagues,workers->size,
-		      sizeof workers->colleagues[0], cmp_names);
-	}else if (strcmp(fieldName, "work_experience") == 0 && isAscending ==1) {
-		qsort(workers->colleagues, workers->size,
-		      sizeof (workers->colleagues[0]), cmp_work);
+	if (strcmp(fieldName, "name_company") == 0 && isAscending == 1){
+		qsort(*(workers->colleagues), workers->size,
+		      sizeof(struct Colleague), cmp_names);
 	}
 }
 
