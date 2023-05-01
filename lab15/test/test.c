@@ -1,4 +1,4 @@
-#include "../src/colleague.h"
+#include "colleague.h"
 #include <check.h>
 
 
