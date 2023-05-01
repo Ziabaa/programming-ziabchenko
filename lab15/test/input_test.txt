@@ -1,0 +1,1 @@
+1,Google,2.300000,Ivan,Teplyi,dev-good@lal.com,0
