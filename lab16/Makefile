@@ -4,22 +4,22 @@ C_OPTS= $(MAC_OPTS) -std=gnu11 -g -fsanitize=address -Wall -Wextra -Werror -Wfor
 
 leak-check:
 	ASAN_OPTIONS=detect_leaks=1 dist/main.bin
-#	ASAN_OPTIONS=detect_leaks=1 LLVM_PROFILE_FILE="dist/test.profraw" dist/test.bin
+	ASAN_OPTIONS=detect_leaks=1 LLVM_PROFILE_FILE="dist/test.profraw" dist/test.bin
 
 clean:
 	rm -rf dist
 prep:
 	mkdir dist
-compile:   main.bin #test.bin
+compile:   main.bin test.bin
 
-#test.bin: test/test.c
-#	$(CC) $(C_OPTS) $< -fprofile-instr-generate -fcoverage-mapping -o ./dist/$@ -lcheck -lm -lrt -lpthread -lsubunit
-#
-#test: clean prep compile leak-check
-#	LLVM_PROFILE_FILE="dist/test.profraw" ./dist/test.bin
-#	llvm-profdata merge -sparse dist/test.profraw -o dist/test.profdata
-#	llvm-cov report dist/test.bin -instr-profile=dist/test.profdata src/*.c
-#	llvm-cov show dist/test.bin -instr-profile=dist/test.profdata src/*.c --format html > dist/coverage.html
+test.bin: test/test.c
+	$(CC) $(C_OPTS) $< -fprofile-instr-generate -fcoverage-mapping -o ./dist/$@ -lcheck -lm -lrt -lpthread -lsubunit
+
+test: clean prep compile leak-check
+	LLVM_PROFILE_FILE="dist/test.profraw" ./dist/test.bin
+	llvm-profdata merge -sparse dist/test.profraw -o dist/test.profdata
+	llvm-cov report dist/test.bin -instr-profile=dist/test.profdata src/*.c
+	llvm-cov show dist/test.bin -instr-profile=dist/test.profdata src/*.c --format html > dist/coverage.html
 
 main.bin: src/main.c
 	$(CC) $(C_OPTS) $< -o ./dist/$@

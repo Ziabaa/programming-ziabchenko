@@ -36,25 +36,25 @@ int main()
 	workers->colleagues[1]->employ_characteristic = 1;
 	workers->colleagues[2]->employ_characteristic = 2;
 
-//	writeWorkersToFile("assets/output.txt", workers);
-//	printf("%lu\n", sizeof(struct Colleague));
-
-	sortColleague(workers, "name_company", 1);
+	writeWorkersToFile("assets/output.txt", workers);
 	printWorkers(workers);
 
-//	struct Workers * new_workers_from_file = readColleagueFromFile("assets/input.txt");
-//	printWorkers(new_workers_from_file);
-//
-//	size_t count = findCountColleagueInCompany_WithoutInsurance(new_workers_from_file, "Google");
-//	printf("Count colleagues in company %s: %zu\n", "Google", count);
+	sortColleague(workers, "work_experience");
+	printWorkers(workers);
+
+	struct Workers * new_workers_from_file = readColleagueFromFile("assets/input.txt");
+	printWorkers(new_workers_from_file);
+
+	size_t count = findCountColleagueInCompany_WithoutInsurance(new_workers_from_file, "Google");
+	printf("Count colleagues in company %s: %zu\n", "Google", count);
 
 	for (size_t i = 0; i < 3; i++){
 		free(workers->colleagues[i]);
 	}
-//	for (size_t i = 0; i < new_workers_from_file->size; i++){
-//		free(new_workers_from_file->colleagues[i]);
-//	}
-//	free(new_workers_from_file);
+	for (size_t i = 0; i < new_workers_from_file->size; i++){
+		free(new_workers_from_file->colleagues[i]);
+	}
+	free(new_workers_from_file);
 	free(workers);
 	return 0;
 }

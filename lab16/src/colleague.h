@@ -17,7 +17,7 @@ enum Characters{
  * Виводить характеристику співробітника
  * @param character сама характеристика
  */
-
+void printCharacteristicColleague(enum Characters character);
 /**
  * Контактна інформація про співробітника
  */
@@ -38,11 +38,21 @@ struct Colleague{
 	enum Characters employ_characteristic; /**<деяка характеристика*/
 };
 
-void printCharacteristicColleague(enum Characters character);
-
+/**
+ * Виводить до консолі структуру робітника
+ * @param workers Самі робітники
+ */
 void printColleague(struct Colleague * colleague);
-
+/**
+ * записує до файлу структуру робітників
+ * @param file відкритий файл
+ * @param colleague співробітник
+ */
 void writeColleagueToFile(FILE* file, struct Colleague * colleague);
-
+/**
+ * зчитує одного робітника з лінії
+ * @param line лінія файлу з якого зчитати співробітника
+ * @return проситаного робітника
+ */
 struct Colleague* parseColleague(char * line);
 #endif

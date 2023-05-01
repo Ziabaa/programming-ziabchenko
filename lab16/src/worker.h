@@ -13,9 +13,18 @@ struct Workers{
 	struct Colleague** colleagues;
 	size_t size;
 };
-
+/**
+ * додає одиного співробітника
+ * @param workers куди записуємо
+ * @param pos в яку позицію потрібно записати
+ * @param colleague співробітник якого записуємо
+ */
 void addElement(struct Workers * workers, size_t pos, struct Colleague * colleague);
-
+/**
+ * видаляє одного співробіника
+ * @param workers звідки видаляємо
+ * @param pos позиція
+ */
 void delElement(struct Workers * workers, size_t pos);
 
 
@@ -42,17 +51,17 @@ struct Workers * readColleagueFromFile(char * filename);
 void writeWorkersToFile(char * filename, struct Workers * workers);
 
 /**
- *
- * @param workers Самі робітники
+ *виводить до консолі співробітників
+ * @param workers робітники
  */
 void printWorkers(struct Workers * workers);
 
 /**
- *
- * @param workers Самі робітники
- * @param fieldName
- * @param isAscending
+ * сортує робітників за певним полем
+ * @param workers робітники
+ * @param fieldName поле для сортування
+ * @param isAscending по зростанню чи спаданню
  */
-void sortColleague(struct Workers * workers, char * fieldName, bool isAscending);
+void sortColleague(struct Workers * workers, char * fieldName);
 
 #endif

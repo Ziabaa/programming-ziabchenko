@@ -48,7 +48,7 @@ size_t findCountColleagueInCompany_WithoutInsurance(struct Workers * workers, ch
 struct Workers * readColleagueFromFile(char * filename){
 	FILE * file = fopen(filename, "r");
 	if (file == NULL) {
-		fprintf(stderr, "Can`t open file: %s", strerror(errno));
+		fprintf(stderr, "Can`t open file: %s\n", strerror(errno));
 		exit(1);
 	}
 	struct Workers * workers = malloc(sizeof(struct Workers));
@@ -73,7 +73,7 @@ struct Workers * readColleagueFromFile(char * filename){
 void writeWorkersToFile(char * filename, struct Workers * workers){
 	FILE * file = fopen(filename, "w");
 	if (file == NULL) {
-		fprintf(stderr, "Can`t open file: %s", strerror(errno));
+		fprintf(stderr, "Can`t open file: %s\n", strerror(errno));
 		exit(1);
 	}
 
@@ -83,18 +83,89 @@ void writeWorkersToFile(char * filename, struct Workers * workers){
 	fclose(file);
 }
 
-int cmp_names(const void *name1, const void *name2)
+int cmp_insurance(const void *ins1, const void *ins2)
 {
-	const struct Colleague *a = name1, *b = name2;
-	printf("----------->%s\n", a->name_company);
-	printf("----------->%s\n\n", b->name_company);
+	const struct Colleague *a = *((const void **)ins1);
+	const struct Colleague *b = *((const void **)ins2);
+	if (a->insurance < b->insurance)
+		return -1;
+	if (a->insurance > b->insurance)
+		return 1;
+	return 0;
+}
+
+int cmp_nameCompany(const void *name1, const void *name2)
+{
+	const struct Colleague * a = *((const void **)name1);
+	const struct Colleague * b = *((const void **)name2);
 	return -strcmp(a->name_company, b->name_company);
 }
 
-void sortColleague(struct Workers * workers, char * fieldName, bool isAscending){
-	if (strcmp(fieldName, "name_company") == 0 && isAscending == 1){
-		qsort(*(workers->colleagues), workers->size,
-		      sizeof(struct Colleague), cmp_names);
+int cmp_workExpirience(const void *name1, const void *name2)
+{
+	const struct Colleague *a = *((const void **)name1);
+	const struct Colleague *b = *((const void **)name2);
+	if (a->work_experience < b->work_experience)
+		return -1;
+	if (a->work_experience > b->work_experience)
+		return 1;
+	return 0;
+}
+
+int cmp_nameColleague(const void *name1, const void *name2)
+{
+	const struct Colleague * a = *((const void **)name1);
+	const struct Colleague * b = *((const void **)name2);
+	return -strcmp(a->contact_information.name_colleague, b->contact_information.name_colleague);
+}
+
+int cmp_surnameColleague(const void *name1, const void *name2)
+{
+	const struct Colleague * a = *((const void **)name1);
+	const struct Colleague * b = *((const void **)name2);
+	return -strcmp(a->contact_information.name_colleague, b->contact_information.name_colleague);
+}
+
+int cmp_email(const void *name1, const void *name2)
+{
+	const struct Colleague * a = *((const void **)name1);
+	const struct Colleague * b = *((const void **)name2);
+	return -strcmp(a->contact_information.email, b->contact_information.email);
+}
+
+int cmp_employ_characteristic(const void *name1, const void *name2)
+{
+	const struct Colleague *a = *((const void **)name1);
+	const struct Colleague *b = *((const void **)name2);
+	if (a->employ_characteristic < b->employ_characteristic)
+		return -1;
+	if (a->employ_characteristic > b->employ_characteristic)
+		return 1;
+	return 0;
+}
+
+void sortColleague(struct Workers * workers, char * fieldName){
+	if (strcmp(fieldName, "insurance") == 0){
+		qsort(workers->colleagues, workers->size,
+		      sizeof (workers->colleagues[0]), cmp_insurance);
+	}else if (strcmp(fieldName, "name_company") == 0){
+		qsort(workers->colleagues, workers->size,
+		      sizeof (workers->colleagues[0]), cmp_nameCompany);
+	}else if (strcmp(fieldName, "work_experience") == 0){
+		qsort(workers->colleagues, workers->size,
+		      sizeof (workers->colleagues[0]), cmp_workExpirience);
+	}else if (strcmp(fieldName, "name_colleague") == 0){
+		qsort(workers->colleagues, workers->size,
+		      sizeof (workers->colleagues[0]), cmp_nameColleague);
+	}else if (strcmp(fieldName, "surname_colleague") == 0){
+		qsort(workers->colleagues, workers->size,
+		      sizeof (workers->colleagues[0]), cmp_nameCompany);
+	}else if (strcmp(fieldName, "email") == 0){
+		qsort(workers->colleagues, workers->size,
+		      sizeof (workers->colleagues[0]), cmp_email);
+	}else if (strcmp(fieldName, "employ_characteristic") == 0){
+		qsort(workers->colleagues, workers->size,
+		      sizeof (workers->colleagues[0]), cmp_employ_characteristic);
 	}
 }
 
