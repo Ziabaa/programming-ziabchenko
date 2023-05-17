@@ -1,5 +1,5 @@
-#include "colleague.h"
-#include "worker.h"
+#include "../src/colleague.h"
+#include "../src/worker.h"
 #include <gtest/gtest.h>
 
 
