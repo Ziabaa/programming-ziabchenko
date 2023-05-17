@@ -73,6 +73,7 @@ Workers * readColleagueFromFile(const char * filename){
 		}
 		const Colleague * colleague = parseColleague(line);
 		workers->addElement(0, colleague);
+		delete colleague;
 		delete[] line;
 	}
 	fclose(file);
