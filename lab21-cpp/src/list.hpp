@@ -152,12 +152,6 @@ public:
 		}
 
 	    }
-
-//	    cout << "!!!!!min!!!!!" << Move(min)->data << endl;
-//	    cout << "!!!!!i!!!!!" << Move(i)->data << endl << endl;
-//	    std::swap(Move(i)->data, Move(min)->data);
-//	    min = minElement(i);
-
 	}
     }
 
